@@ -1,0 +1,20 @@
+{
+    "name": "vlad/data-forge",
+    "description": "Test app",
+    "type": "project",
+    "require-dev": {
+        "symfony/var-dumper": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "vlad anokhin",
+            "email": "vlad.anokhin19@gmail.com"
+        }
+    ],
+    "require": {}
+}

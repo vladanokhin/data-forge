@@ -1,0 +1,9 @@
+/vendor
+/node_modules
+/.fleet
+/.idea
+/.vscode
+.env
+npm-debug.log
+yarn-error.log
+.DS_Store
