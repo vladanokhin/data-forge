@@ -5,9 +5,6 @@ services:
     container_name: ${PROJECT_NAME}-workspace
     build:
         context: ./workspace
-        dockerfile: ./docker/workspace/Dockerfile
-    ports:
-        - ${VITE_PORT}:8000
     expose:
         - 9000
     volumes:

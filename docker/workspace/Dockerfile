@@ -8,4 +8,4 @@ ARG PROJECT_NAME=DataForge
 
 WORKDIR /var/www/${PROJECT_NAME}
 
-USER comp
+USER www-data
