@@ -7,7 +7,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Src\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [
@@ -16,5 +16,7 @@
             "email": "vlad.anokhin19@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^8.2"
+    }
 }
