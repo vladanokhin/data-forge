@@ -1,8 +1,9 @@
 <?php
 
+use Src\App;
+
 require_once '../vendor/autoload.php';
 
-use App\App;
 
 $app = new App();
 
