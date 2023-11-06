@@ -18,7 +18,7 @@ class App
      */
     public function run()
     {
-        Metrics::loadFrom([
+        $metricsData = Metrics::loadFrom([
             FirstService::class,
             SecondService::class,
         ]);

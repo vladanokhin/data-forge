@@ -2,6 +2,7 @@
 
 namespace Src\Services;
 
+use Src\Contracts\Services\IMetricsData;
 use Src\Contracts\Services\IMetricsService;
 
 /**
@@ -11,28 +12,23 @@ class Metrics
 {
 
     /**
-     *
+     * Load metrics from services
      * @param class-string<IMetricsService>[] $services
-     * @return void
+     * @return IMetricsData
      */
-    static public function loadFrom(array $services): void
+    static public function loadFrom(array $services): IMetricsData
     {
         $data = [];
-        $metrics = new self();
 
         /**
          * @var $service IMetricsService
          */
         foreach ($services as $service) {
             $service = new $service;
-            $data += $service->load();
+            $data[$service::class]['_object'] = $service;
+            $data[$service::class]['data'] = $service->load();
         }
 
-        $metrics->save($data);
-    }
-
-    public function save(array $data)
-    {
-
+        return new MetricsData($data);
     }
 }

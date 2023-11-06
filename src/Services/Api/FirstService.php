@@ -25,4 +25,12 @@ class FirstService extends MetricsServiceApi
             'status_code' => 200,
         ];
     }
+
+    public function getRelationship(): array
+    {
+        return [
+            'id'         => 'name',
+            'foreignKey' => [SecondService::class, 'ad_id']
+        ];
+    }
 }

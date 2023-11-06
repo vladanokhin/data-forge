@@ -26,4 +26,9 @@ class SecondService extends MetricsServiceApi
             'has_value'     => ['message', 'OK']
         ];
     }
+
+    public function getRelationship(): array
+    {
+        return [];
+    }
 }
