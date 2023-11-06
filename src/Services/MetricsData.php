@@ -162,6 +162,8 @@ class MetricsData implements IMetricsData
     }
 
     /**
+     * Sorts an array of associative arrays
+     * by a specified key
      * @param string $key
      * @param int $direction
      * @return void
