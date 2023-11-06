@@ -27,5 +27,8 @@ class App
         ]);
         $metricsData->sortBy('impressions', SortDirection::ASC);
         $metricsData->saveTo($repository);
+
+        (new HtmlView($repository))
+            ->show('metrics');
     }
 }
