@@ -2,6 +2,7 @@
 
 namespace Src\Repositories;
 
+use Generator;
 use PDO;
 use Src\Contracts\Repositories\IMetricRepository;
 
@@ -24,8 +25,9 @@ class DbMetricRepository implements IMetricRepository
     /**
      * Saving metrics data
      * @param array $metrics
+     * @return void
      */
-    public function insert(array $metrics)
+    public function insert(array $metrics): void
     {
         $fields = array_keys($metrics);
         $columns = implode(', ', $fields);
@@ -42,8 +44,9 @@ class DbMetricRepository implements IMetricRepository
      * Update metrics data
      * @param array $metrics
      * @param array $conditions
+     * @return void
      */
-    public function update(array $metrics, array $conditions)
+    public function update(array $metrics, array $conditions): void
     {
         $fields = array_keys($metrics);
         $set = implode(', ', array_map(fn ($field) => "$field = :$field", $fields));
@@ -72,5 +75,20 @@ class DbMetricRepository implements IMetricRepository
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         return (bool) $result['isExist'];
+    }
+
+    /**
+     * Get all the data
+     * @return Generator
+     */
+    public function getAll(): Generator
+    {
+        $sql = "SELECT * FROM metrics";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        foreach ($stmt->fetchAll() as $metric) {
+            yield $metric;
+        }
     }
 }
