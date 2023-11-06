@@ -20,6 +20,7 @@
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.0",
         "adbario/php-dot-notation": "^3.3",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "vlucas/phpdotenv": "^5.5"
     }
 }

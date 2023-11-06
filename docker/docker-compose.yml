@@ -9,6 +9,8 @@ services:
           - PROJECT_NAME = ${PROJECT_NAME}
     expose:
         - 9000
+    env_file:
+       - '../.env'
     volumes:
       - ../:/var/www/${PROJECT_NAME}:cached
 
