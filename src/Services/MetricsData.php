@@ -2,6 +2,7 @@
 
 namespace Src\Services;
 
+use Src\Contracts\Repositories\IMetricRepository;
 use Src\Contracts\Services\IMetricsData;
 
 /**
@@ -66,7 +67,15 @@ class MetricsData implements IMetricsData
         $foreignService = $this->servicesData[$foreignClass];
 
         foreach ($data as $item) {
+            //Skip metrics without the correct id
+            if((int) $item[$id] === 0)
+                continue;
+
             $foreignData = $this->getDataFromForeignClass($foreignClass, $item[$id], $foreignKey);
+
+            if(empty($foreignData))
+                continue;
+
             $this->data[] = $item + $foreignData;
         }
 
@@ -119,11 +128,35 @@ class MetricsData implements IMetricsData
     }
 
     /**
-     * Get the extracted data
+     * Save extracted metric data to repository
+     * @param IMetricRepository $repository
+     * @return void
+     */
+    public function saveTo(IMetricRepository $repository): void
+    {
+        foreach ($this->data as $metrics) {
+            $metrics = $this->prepareToSaving($metrics);
+
+            if($repository->exists($metrics['ad_id']))
+                $repository->update($metrics, ['ad_id' => $metrics['ad_id']]);
+            else
+                $repository->insert($metrics);
+        }
+    }
+
+    /**
+     * Prepare data before saving using a repository
+     * @param array $metrics
      * @return array
      */
-    public function get(): array
+    private function prepareToSaving(array $metrics)
     {
-        return $this->data;
+        unset($metrics['name']);
+
+        // Convert to a percentage
+        $roiPercent = round((float)$metrics['roi']);
+        $metrics['roi'] = $roiPercent;
+
+        return $metrics;
     }
 }
