@@ -4,6 +4,7 @@ namespace Src\Services;
 
 use Src\Contracts\Repositories\IMetricRepository;
 use Src\Contracts\Services\IMetricsData;
+use Src\Enums\SortDirection;
 
 /**
  * Processing metrics data
@@ -158,5 +159,15 @@ class MetricsData implements IMetricsData
         $metrics['roi'] = $roiPercent;
 
         return $metrics;
+    }
+
+    /**
+     * @param string $key
+     * @param int $direction
+     * @return void
+     */
+    public function sortBy(string $key, int $direction): void
+    {
+       $this->data = ArraySorter::sortByKey($key, $this->data, $direction);
     }
 }

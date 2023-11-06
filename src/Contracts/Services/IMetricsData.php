@@ -3,6 +3,7 @@
 namespace Src\Contracts\Services;
 
 use Src\Contracts\Repositories\IMetricRepository;
+use Src\Enums\SortDirection;
 
 interface IMetricsData
 {
@@ -13,5 +14,12 @@ interface IMetricsData
      * @return void
      */
     public function saveTo(IMetricRepository $repository): void;
+
+    /**
+     * @param string $key
+     * @param int $direction
+     * @return void
+     */
+    public function sortBy(string $key, int $direction): void;
 
 }

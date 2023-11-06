@@ -3,6 +3,7 @@
 namespace Src;
 
 
+use Src\Enums\SortDirection;
 use Src\Repositories\DbMetricRepository;
 use Src\Services\Api\FirstService;
 use Src\Services\Api\SecondService;
@@ -24,7 +25,7 @@ class App
             FirstService::class,
             SecondService::class,
         ]);
-
+        $metricsData->sortBy('impressions', SortDirection::ASC);
         $metricsData->saveTo($repository);
     }
 }
